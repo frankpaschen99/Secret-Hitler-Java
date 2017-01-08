@@ -6,6 +6,7 @@ import com.codelackeys.game.CoreGame;
 import com.codelackeys.network.SHReq;
 import com.codelackeys.network.SHRes;
 import com.codelackeys.screens.GameBoard;
+import com.codelackeys.screens.LobbyScreen;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
@@ -15,7 +16,7 @@ public class HitlerClient {
 	private Client client;
 	private Kryo kryo;
 	private CoreGame game;
-	
+
 	public HitlerClient(CoreGame game) {
 		client = new Client();
 		client.start();
@@ -23,7 +24,8 @@ public class HitlerClient {
 		kryo = client.getKryo();
 		kryo.register(SHReq.class);
 		kryo.register(SHRes.class);
-		
+		kryo.register(com.codelackeys.entities.HitlerServer.class);
+
 		try {
 			client.connect(5000, "10.0.0.4", 54555, 54777);
 		} catch (IOException e) {
@@ -34,8 +36,8 @@ public class HitlerClient {
 	       public void received (Connection connection, Object object) {
 	          if (object instanceof SHRes) {
 	             SHRes res = (SHRes) object;
-	            	 System.out.println("received message");
-	            	 // HitlerClient.this.game.setScreen(new GameBoard());
+            	 System.out.println("received message");
+            	 
 	          }
 	       }
 	    });

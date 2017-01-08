@@ -9,6 +9,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.codelackeys.entities.HitlerServer;
 import com.codelackeys.game.CoreGame;
+import com.codelackeys.utils.GLOBALS;
 
 public class CreateLobby implements Screen {
 	private CoreGame game;
@@ -25,6 +26,7 @@ public class CreateLobby implements Screen {
 		JOptionPane.showMessageDialog(null, "Lobby Password: " + password + ", Lobby Code: " + code + ". Give"
 				+ " this information to your friends");
 		HitlerServer server = new HitlerServer(code, password, username);
+		GLOBALS.IS_HOST = true;
 		game.setScreen(new LobbyScreen(server));
 	}
 

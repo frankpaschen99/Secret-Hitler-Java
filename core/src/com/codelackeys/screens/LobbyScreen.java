@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.codelackeys.entities.HitlerServer;
 import com.codelackeys.entities.Player;
+import com.codelackeys.utils.GLOBALS;
 
 public class LobbyScreen implements Screen {
 
@@ -16,7 +17,8 @@ public class LobbyScreen implements Screen {
 	
 	public LobbyScreen(HitlerServer server) {
 		this.server = server;
-		this.batch = new SpriteBatch();
+	}
+	public LobbyScreen() {
 	}
 	
 	@Override
@@ -26,17 +28,22 @@ public class LobbyScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
+		this.batch = new SpriteBatch();
 		// TODO Auto-generated method stub
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
-		String playerString = "";
-		for (Player x : server.lobby.players) playerString += x.username + ',';
-		
-		batch.begin();
-		font.draw(batch, "Currently in lobby #" + server.lobby.lobbyID, 0, 600);
-		font.draw(batch, "Player list: " + playerString, 0, 500);
-		batch.end();
+		if (GLOBALS.IS_HOST) {
+			String playerString = "";
+			for (Player x : server.lobby.players) playerString += x.username + ',';
+			
+			batch.begin();
+			font.draw(batch, "Currently in lobby #" + server.lobby.lobbyID, 0, 600);
+			font.draw(batch, "Player list: " + playerString, 0, 500);
+			batch.end();
+		} else {
+			System.out.println("You're a fuccboi");
+		}
 	}
 
 	@Override

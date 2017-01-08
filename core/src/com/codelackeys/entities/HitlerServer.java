@@ -37,13 +37,14 @@ public class HitlerServer {
 			public void received(Connection con, Object packet) { // DON'T CHANGE METHOD SIGNATURE
 				if (packet instanceof SHReq) {
 					SHReq req = (SHReq) packet;
-					//if (req.password == lobby.password) 
-					lobby.addPlayer(new Player(con, req.username));
-					
-					/* Give them the OK to start. Normally this won't happen till host presses start game */
-					SHRes res = new SHRes();
-					res.text = "START";
-					con.sendTCP(res);
+					if (req.password.equals(lobby.password)) {
+						lobby.addPlayer(new Player(con, req.username));
+						
+						/* Give them the OK to start. Normally this won't happen till host presses start game */
+						SHRes res = new SHRes();
+						res.text = "START";
+						con.sendTCP(res);
+					}	
 				}
 			}
 		});
