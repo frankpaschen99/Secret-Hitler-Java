@@ -36,7 +36,7 @@ public class LobbyScreen implements Screen {
 			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 			
 			String playerString = "";
-			for (Player x : server.lobby.players) playerString += x.username + (server.lobby.players.size() == 1 ? ' ' : ', ');
+			for (Player x : server.lobby.players) playerString += x.username + (server.lobby.players.size() == 1 ? ' ' : ", ");
 			
 			batch.begin();
 			font.draw(batch, "Currently in lobby #" + server.lobby.lobbyID, 0, 600);
