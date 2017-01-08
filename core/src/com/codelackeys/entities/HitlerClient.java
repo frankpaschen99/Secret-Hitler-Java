@@ -52,6 +52,12 @@ public class HitlerClient {
 				}
 			}
 		});
+		client.addListener(new Listener() {
+			@Override
+			public void disconnected(Connection connection) {
+				client.close();
+			}
+		});
 	}
 
 	public void moveScreens() {

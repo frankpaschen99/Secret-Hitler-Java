@@ -1,10 +1,7 @@
 package com.codelackeys.screens;
 
 import javax.swing.JOptionPane;
-
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
 import com.codelackeys.entities.HitlerClient;
 import com.codelackeys.game.CoreGame;
 
@@ -18,9 +15,9 @@ public class JoinLobby implements Screen {
 	@Override
 	public void show() {
 		/** Query the user for the lobby id, lobby password, and their username **/
-		int lobbyID = Integer.parseInt(JOptionPane.showInputDialog("Enter lobby code"));
-		String username = JOptionPane.showInputDialog("Desired username?");
-		String password = JOptionPane.showInputDialog("Enter password; leave blank if none");
+		int lobbyID = Integer.parseInt(JOptionPane.showInputDialog("Enter the lobby code:"));
+		String password = JOptionPane.showInputDialog("Enter lobby password: (leave blank if none)");
+		String username = JOptionPane.showInputDialog("Enter your desired username:");
 		
 		/** Create a new HitlerClient object **/
 		HitlerClient client = new HitlerClient(game);

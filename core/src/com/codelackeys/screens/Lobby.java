@@ -1,6 +1,7 @@
 package com.codelackeys.screens;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import com.codelackeys.entities.Player;
 import com.esotericsoftware.kryonet.Connection;
@@ -20,10 +21,12 @@ public class Lobby {
 	}
 	/** Called by the server. Removes disconnected player from the player ArrayList **/
 	public void playerDisconnect(Connection con) {
-		for (Player p : players) {
-			if (p.connection == con) {
-				players.remove(p);
-			}
+		con.close();
+		
+		Iterator<Player> iter = players.iterator();
+		while (iter.hasNext()) {
+			if (iter.next().connection == con)
+				iter.remove();
 		}
 	}
 }

@@ -21,7 +21,7 @@ public class CreateLobby implements Screen {
 	@Override
 	public void show() {
 		/** Use JOptionPane to get lobby password and username from host **/
-		String password = JOptionPane.showInputDialog("Enter lobby password");
+		String password = JOptionPane.showInputDialog("Enter new lobby password:");
 		String username = JOptionPane.showInputDialog("Enter your desired username:");
 		
 		/** Generate a unique lobbyID **/

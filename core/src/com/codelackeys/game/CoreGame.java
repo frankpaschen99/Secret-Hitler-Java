@@ -1,13 +1,13 @@
 package com.codelackeys.game;
 
-import com.codelackeys.screens.WelcomeScreen;
+import com.codelackeys.screens.StartScreen;
 import com.badlogic.gdx.Game;
 
 public class CoreGame extends Game {
 	
 	@Override
 	public void create () {
-		setScreen(new WelcomeScreen(this));
+		setScreen(new StartScreen(this));
 	}
 
 	@Override
