@@ -1,11 +1,13 @@
 package com.codelackeys.entities;
 
+import com.esotericsoftware.kryonet.Connection;
+
 public class Player {
-	private int network_id;
-	private String username;
+	public Connection connection;
+	public String username;
 	
-	public Player(int network_id, String username) {
-		this.network_id = network_id;
+	public Player(Connection connection, String username) {
+		this.connection = connection;
 		this.username = username;
 	}
 }

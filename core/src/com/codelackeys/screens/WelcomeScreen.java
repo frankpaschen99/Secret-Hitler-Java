@@ -22,7 +22,7 @@ public class WelcomeScreen implements Screen {
 	public void show() {
 		// This is called once, when setScreen() is called
 		batch = new SpriteBatch();
-		game.setScreen(new Lobby(123, "siduck"));
+		game.setScreen(new Lobby(game, 123, "siduck"));
 	}
 
 	@Override
