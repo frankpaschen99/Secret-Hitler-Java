@@ -12,11 +12,12 @@ import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 
+/** User client. One for each client program **/
 public class HitlerClient {
-	private Client client;
-	private Kryo kryo;
-	private CoreGame game;
-	public GameState gameState;
+	private Client client;				// Kryonet Client object
+	private Kryo kryo;					// has to do with serialization idfk
+	private CoreGame game;				// Reference to the CoreGame
+	public GameState gameState;			// TODO: make gamestates work
 	
 	public HitlerClient(final CoreGame game) {
 		this.game = game;
@@ -33,17 +34,19 @@ public class HitlerClient {
 			e.printStackTrace();
 		}
 
+		/** Wait for a response from the server to move to the lobby screen. **/
 		client.addListener(new Listener() {
 			@Override
 			public void received(Connection connection, Object object) {
 				if (object instanceof SHRes) {
 					SHRes res = (SHRes) object;
-					final CoreGame g = HitlerClient.this.game;
+					if (res.text != "START") return;
 					
-					// run g.setScreen on the main thread, not the Client thread that is created
+					// Run g.setScreen on the main thread, not the Client thread that is created
 					Gdx.app.postRunnable(new Runnable() {
 						public void run() {
-							g.setScreen(new LobbyScreen());
+							// Move the client's screen to the Lobby
+							HitlerClient.this.game.setScreen(new LobbyScreen());
 						}
 					});
 				}
