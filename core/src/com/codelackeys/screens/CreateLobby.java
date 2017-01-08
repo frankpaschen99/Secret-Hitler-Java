@@ -1,13 +1,14 @@
 package com.codelackeys.screens;
 
 import com.badlogic.gdx.Screen;
+import com.codelackeys.utils.GLOBALS;
 
 public class CreateLobby implements Screen {
 
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
-
+		GLOBALS.IS_HOST = true;
 	}
 
 	@Override

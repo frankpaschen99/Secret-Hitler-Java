@@ -1,20 +1,28 @@
 package com.codelackeys.screens;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.codelackeys.game.CoreGame;
+import com.esotericsoftware.kryonet.Server;
 
 public class WelcomeScreen implements Screen {
 
 	/* The Welcome screen will include two buttons: Create Lobby and Join Lobby. */
 	
 	private SpriteBatch batch;
+	private CoreGame game;
 	
+	public WelcomeScreen(CoreGame game) {
+		this.game = game;
+	}
 	@Override
 	public void show() {
 		// This is called once, when setScreen() is called
 		batch = new SpriteBatch();
+		game.setScreen(new Lobby(123, "siduck"));
 	}
 
 	@Override
