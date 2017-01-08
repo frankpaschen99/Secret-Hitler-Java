@@ -3,35 +3,22 @@ package com.codelackeys.screens;
 import java.util.ArrayList;
 
 import com.codelackeys.entities.Player;
-import com.codelackeys.network.SHRes;
 import com.esotericsoftware.kryonet.Connection;
 
 public class Lobby {
 
-	public int lobbyID;
-	public ArrayList<Player> players;
-	public String password;
-	public Player host;
+	public int lobbyID;						// Unique lobby ID
+	public ArrayList<Player> players;		// ArrayList of all Players
+	public String password;					// Password to join the server
+	public Player host;						// The Player object of the server host
 	
 	public Lobby(int lobbyID, String password) {
+		/** Initialize fields **/
 		this.password = password;
 		this.lobbyID = lobbyID;
-		
-		players = new ArrayList<Player>();
+		this.players = new ArrayList<Player>();
 	}
-	public void startGame() {
-		// Notify all clients to switch to the GameBoard screen
-		for (Player p : players) {
-			if (p == host) continue;
-			
-			SHRes res = new SHRes();
-			res.text = "START";
-			p.connection.sendTCP(res);
-		}
-	}
-	public void addPlayer(Player p) {
-		this.players.add(p);
-	}
+	/** Called by the server. Removes disconnected player from the player ArrayList **/
 	public void playerDisconnect(Connection con) {
 		for (Player p : players) {
 			if (p.connection == con) {

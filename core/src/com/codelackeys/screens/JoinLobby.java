@@ -17,49 +17,28 @@ public class JoinLobby implements Screen {
 	
 	@Override
 	public void show() {
-		// TODO Auto-generated method stub
-		System.out.println("show() called");
+		/** Query the user for the lobby id, lobby password, and their username **/
 		int lobbyID = Integer.parseInt(JOptionPane.showInputDialog("Enter lobby code"));
 		String username = JOptionPane.showInputDialog("Desired username?");
 		String password = JOptionPane.showInputDialog("Enter password; leave blank if none");
+		
+		/** Create a new HitlerClient object **/
 		HitlerClient client = new HitlerClient(game);
+		
+		/** Call joinGame() on the client to send the join request to the host **/
 		client.joinGame(lobbyID, username, password);
 	}
 
 	@Override
-	public void render(float delta) {
-		Gdx.gl.glClearColor(0, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-	}
-
+	public void render(float delta) {}
 	@Override
-	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
-
-	}
-
+	public void resize(int width, int height) {}
 	@Override
-	public void pause() {
-		// TODO Auto-generated method stub
-
-	}
-
+	public void pause() {}
 	@Override
-	public void resume() {
-		// TODO Auto-generated method stub
-
-	}
-
+	public void resume() {}
 	@Override
-	public void hide() {
-		// TODO Auto-generated method stub
-
-	}
-
+	public void hide() {}
 	@Override
-	public void dispose() {
-		// TODO Auto-generated method stub
-
-	}
-
+	public void dispose() {}
 }

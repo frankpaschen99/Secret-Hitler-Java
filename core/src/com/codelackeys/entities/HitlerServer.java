@@ -18,7 +18,7 @@ public class HitlerServer {
 	public HitlerServer(int lobbyID, String password, String username) {
 		lobby = new Lobby(lobbyID, password);
 		Player host = new Player(null, username);
-		lobby.addPlayer(host);
+		lobby.players.add(host);
 		lobby.host = host;
 
 		server = new Server();
@@ -38,11 +38,10 @@ public class HitlerServer {
 				if (packet instanceof SHReq) {
 					SHReq req = (SHReq) packet;
 					if (req.password.equals(lobby.password)) {
-						lobby.addPlayer(new Player(con, req.username));
+						lobby.players.add(new Player(con, req.username));
 						
 						/* Give them the OK to start. Normally this won't happen till host presses start game */
-						SHRes res = new SHRes();
-						res.text = "START";
+						SHRes res = new SHRes("START");
 						con.sendTCP(res);
 					} else {
 						System.out.println("Incorrect password! TODO: Handle this more elegantly later");
@@ -56,21 +55,5 @@ public class HitlerServer {
 				lobby.playerDisconnect(con);
 			}
 		});
-		
-		/* Send the gamestate to all connected clients */
-		Thread sendState = new Thread() {
-			public void run() {
-				GameState gs = new GameState();
-				gs.players = lobby.players;
-				for(Player p : lobby.players) {
-					try {
-						p.connection.sendTCP(gs);
-					} catch (NullPointerException e) {
-						continue;
-					}
-				}
-			}
-		};
-		sendState.start();
 	}
 }

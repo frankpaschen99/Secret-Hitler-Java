@@ -46,10 +46,6 @@ public class HitlerClient {
 							g.setScreen(new LobbyScreen());
 						}
 					});
-				} else if (object instanceof GameState) {
-					System.out.println("GameState recieved on the client");
-					GameState gs = (GameState) object;
-					HitlerClient.this.gameState = gs;
 				}
 			}
 		});
@@ -60,10 +56,7 @@ public class HitlerClient {
 	}
 
 	public void joinGame(int lobbyID, String username, String password) {
-		SHReq req = new SHReq();
-		req.lobbyID = lobbyID;
-		req.username = username;
-		req.password = password;
+		SHReq req = new SHReq(lobbyID, username, password);
 		client.sendTCP(req);
 	}
 }

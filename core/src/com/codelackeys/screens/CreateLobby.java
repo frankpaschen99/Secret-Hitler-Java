@@ -20,51 +20,36 @@ public class CreateLobby implements Screen {
 	
 	@Override
 	public void show() {
+		/** Use JOptionPane to get lobby password and username from host **/
 		String password = JOptionPane.showInputDialog("Enter lobby password");
 		String username = JOptionPane.showInputDialog("Enter your desired username:");
-		int code = ThreadLocalRandom.current().nextInt(1000, 2000 + 1);
-		JOptionPane.showMessageDialog(null, "Lobby Password: " + password + ", Lobby Code: " + code + ". Give"
-				+ " this information to your friends");
-		HitlerServer server = new HitlerServer(code, password, username);
+		
+		/** Generate a unique lobbyID **/
+		int lobbyID = ThreadLocalRandom.current().nextInt(1000, 2000 + 1);
+		
+		/** Tell the host the unique ID **/
+		JOptionPane.showMessageDialog(null, "Lobby Password: " + password + ", Lobby Code: " + 
+					lobbyID + ". Give this information to your friends");
+		
+		/** Create a new HitlerServer object **/
+		HitlerServer server = new HitlerServer(lobbyID, password, username);
+		/** Set the IS_HOST flag to true for later **/
 		GLOBALS.IS_HOST = true;
+		
+		/** Move them to the lobby screen to wait for players to join **/
 		game.setScreen(new LobbyScreen(server));
 	}
 
 	@Override
-	public void render(float delta) {
-		// Show text box for password, random generated lobby id
-		Gdx.gl.glClearColor(1, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-	}
-
+	public void render(float delta) {}
 	@Override
-	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
-
-	}
-
+	public void resize(int width, int height) {}
 	@Override
-	public void pause() {
-		// TODO Auto-generated method stub
-
-	}
-
+	public void pause() {}
 	@Override
-	public void resume() {
-		// TODO Auto-generated method stub
-
-	}
-
+	public void resume() {}
 	@Override
-	public void hide() {
-		// TODO Auto-generated method stub
-
-	}
-
+	public void hide() {}
 	@Override
-	public void dispose() {
-		// TODO Auto-generated method stub
-
-	}
-
+	public void dispose() {}
 }
