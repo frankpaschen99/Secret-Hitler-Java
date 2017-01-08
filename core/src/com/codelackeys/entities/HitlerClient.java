@@ -39,6 +39,8 @@ public class HitlerClient {
 				if (object instanceof SHRes) {
 					SHRes res = (SHRes) object;
 					final CoreGame g = HitlerClient.this.game;
+					
+					// run g.setScreen on the main thread, not the Client thread that is created
 					Gdx.app.postRunnable(new Runnable() {
 						public void run() {
 							g.setScreen(new LobbyScreen());
