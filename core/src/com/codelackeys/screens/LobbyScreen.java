@@ -19,6 +19,7 @@ public class LobbyScreen implements Screen {
 		this.server = server;
 	}
 	public LobbyScreen() {
+		
 	}
 	
 	@Override
@@ -29,20 +30,20 @@ public class LobbyScreen implements Screen {
 	@Override
 	public void render(float delta) {
 		this.batch = new SpriteBatch();
-		// TODO Auto-generated method stub
-		Gdx.gl.glClearColor(0, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		if (GLOBALS.IS_HOST) {
+			Gdx.gl.glClearColor(0, 0, 0, 1);
+			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+			
 			String playerString = "";
-			for (Player x : server.lobby.players) playerString += x.username + ',';
+			for (Player x : server.lobby.players) playerString += x.username + (server.lobby.players.size() == 1 ? ' ' : ', ');
 			
 			batch.begin();
 			font.draw(batch, "Currently in lobby #" + server.lobby.lobbyID, 0, 600);
 			font.draw(batch, "Player list: " + playerString, 0, 500);
 			batch.end();
 		} else {
-			System.out.println("You're a fuccboi");
+			// Fetch the player list from the server somehow
 		}
 	}
 

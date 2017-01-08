@@ -15,8 +15,7 @@ public class WelcomeScreen implements Screen {
 	
 	private SpriteBatch batch;
 	private CoreGame game;
-	private Sprite createButton;
-	private Sprite joinButton;
+	private Sprite createButton, joinButton;
 	
 	public WelcomeScreen(CoreGame game) {
 		this.game = game;
@@ -46,7 +45,7 @@ public class WelcomeScreen implements Screen {
 		if (Gdx.input.justTouched()) {
 			if (createButton.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.input.getY())) {
 				game.setScreen(new CreateLobby(game));
-			}/* else if (joinButton.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.input.getY())) {
+			} /*else if (joinButton.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.input.getY())) {
 				game.setScreen(new JoinLobby(game));
 			}*/
 		}

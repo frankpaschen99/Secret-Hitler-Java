@@ -38,6 +38,5 @@ public class Lobby {
 				players.remove(p);
 			}
 		}
-		
 	}
 }

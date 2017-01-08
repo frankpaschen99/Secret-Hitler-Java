@@ -44,7 +44,9 @@ public class HitlerServer {
 						SHRes res = new SHRes();
 						res.text = "START";
 						con.sendTCP(res);
-					}	
+					} else {
+						System.out.println("Incorrect password! TODO: Handle this more elegantly later");
+					}
 				}
 			}
 		});
@@ -54,5 +56,21 @@ public class HitlerServer {
 				lobby.playerDisconnect(con);
 			}
 		});
+		
+		/* Send the gamestate to all connected clients */
+		Thread sendState = new Thread() {
+			public void run() {
+				GameState gs = new GameState();
+				gs.players = lobby.players;
+				for(Player p : lobby.players) {
+					try {
+						p.connection.sendTCP(gs);
+					} catch (NullPointerException e) {
+						continue;
+					}
+				}
+			}
+		};
+		sendState.start();
 	}
 }
