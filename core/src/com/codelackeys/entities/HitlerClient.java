@@ -24,6 +24,7 @@ public class HitlerClient {
 		client = new Client();
 		client.start();
 
+		/** Register Request and Response classes to allow them to be sent **/
 		kryo = client.getKryo();
 		kryo.register(SHReq.class);
 		kryo.register(SHRes.class);
@@ -42,7 +43,7 @@ public class HitlerClient {
 					SHRes res = (SHRes) object;
 					if (res.text != "START") return;
 					
-					// Run g.setScreen on the main thread, not the Client thread that is created
+					// Run setScreen on the main thread, not the Client thread that is created
 					Gdx.app.postRunnable(new Runnable() {
 						public void run() {
 							// Move the client's screen to the Lobby
@@ -52,6 +53,7 @@ public class HitlerClient {
 				}
 			}
 		});
+		/** If a client disconnects, close the client object **/
 		client.addListener(new Listener() {
 			@Override
 			public void disconnected(Connection connection) {
@@ -60,10 +62,7 @@ public class HitlerClient {
 		});
 	}
 
-	public void moveScreens() {
-		game.setScreen(new LobbyScreen());
-	}
-
+	/** Send the join request to the server. **/
 	public void joinGame(int lobbyID, String username, String password) {
 		SHReq req = new SHReq(lobbyID, username, password);
 		client.sendTCP(req);

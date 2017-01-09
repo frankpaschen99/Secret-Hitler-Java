@@ -28,6 +28,7 @@ public class HitlerServer {
 		} catch (IOException e) {
 		}
 
+		/** Register Request and Response classes to allow them to be sent **/
 		kryo = server.getKryo();
 		kryo.register(SHReq.class);
 		kryo.register(SHRes.class);

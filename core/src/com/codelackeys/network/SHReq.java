@@ -5,6 +5,7 @@ public class SHReq {
 	public int lobbyID;
 	public String username;
 	public String password;
+	public String text;
 	
 	public SHReq() {}
 	public SHReq(int lID, String username, String pw) {
